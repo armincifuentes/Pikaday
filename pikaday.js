@@ -262,7 +262,10 @@
         onSelect: null,
         onOpen: null,
         onClose: null,
-        onDraw: null
+        onDraw: null,
+
+        // Overrides
+        renderDay: null,
     },
 
 
@@ -1108,7 +1111,11 @@
                         showDaysInNextAndPreviousMonths: opts.showDaysInNextAndPreviousMonths
                     };
 
-                row.push(renderDay(dayConfig));
+                if (typeof opts.renderDay === "function") {
+                    row.push(opts.renderDay(dayConfig));
+                } else {
+                    row.push(renderDay(dayConfig));
+                }
 
                 if (++r === 7) {
                     if (opts.showWeekNumber) {
